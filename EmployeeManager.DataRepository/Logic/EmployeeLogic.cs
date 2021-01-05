@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using System.Threading;
 
 namespace EmployeeManager.Models
 {
@@ -8,6 +10,7 @@ namespace EmployeeManager.Models
     {
         // string CreateMail(); switch on employee type
         //decimal calcsalary switch on employee type
-        //set what type of currency, default will be us dollar
+
+        public static void SetCultureToUS() => Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
     }
 }

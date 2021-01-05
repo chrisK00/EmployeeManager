@@ -32,6 +32,7 @@ namespace EmployeeManager.ViewModels
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
 
+            EmployeeLogic.SetCultureToUS();
            //Load employees from Db
             var loadedEmployees = DataAccess.LoadEmployees();
             //Create a employee viewmodel for each employee in loadedEmployees
@@ -46,12 +47,19 @@ namespace EmployeeManager.ViewModels
             switch (filter)
             {
                 case "job":
+                    var sortedByJob = EmployeeViewModels.OrderBy(emp => emp.Employee.TypeOfEmployee).ToList();
+                    EmployeeViewModels.Clear();
+                    sortedByJob.ForEach(emp => EmployeeViewModels.Add(emp));
                     break;
                 case "salary":
+                    var sortedBySalary = EmployeeViewModels.OrderBy(emp => emp.Employee.Salary).ToList();
+                    EmployeeViewModels.Clear();
+                    sortedBySalary.ForEach(emp => EmployeeViewModels.Add(emp));
                     break;
                 case "name":
-                    break;
-                default:
+                    var sortedByName = EmployeeViewModels.OrderBy(emp => emp.Employee.Name).ToList();
+                    EmployeeViewModels.Clear();
+                    sortedByName.ForEach(emp => EmployeeViewModels.Add(emp));
                     break;
             }
         }
