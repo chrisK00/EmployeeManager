@@ -26,6 +26,14 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Margin" Value="0 10 50 0" />
     </Style>
+    
+    <Style TargetType="ComboBox" x:Key="comboBox">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="Background" Value="LightGray" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0 10 50 0" />
+    </Style>
 
     <Style TargetType="TextBox" x:Key="NameTextBox">
         <Setter Property="FontWeight" Value="Bold" />

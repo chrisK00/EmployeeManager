@@ -34,14 +34,11 @@
 
                 <TextBox Width="200" HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource listBoxItems}" x:Name="SalaryTextBox"  FontSize="20"
                      Text="{Binding Employee.DisplaySalary, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox SelectedIndex="0">
-                    <!--TODO Update style for comboBoxItem and combobox+enum binding-->
-                    <ComboBoxItem Width="200" HorizontalAlignment="Right"  Style="{StaticResource comboBoxItem}" x:Name="TypeOfEmployeeTextBox"  FontSize="20"
-                     Content="{Binding Employee.TypeOfEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    </ComboBoxItem>
+                <ComboBox ItemsSource="{Binding EmployeeTypes}"  Style="{StaticResource comboBox}" SelectedItem="{Binding Employee.TypeOfEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <!--TODO Update style for comboBoxItem-->
+
                 </ComboBox>
             </UniformGrid>
-
         </StackPanel>
 
         <!-- "End mini "view"" -->
