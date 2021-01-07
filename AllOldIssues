@@ -1,0 +1,30 @@
+Create a sql lite database table for every type of employee
+-Dont forgett to add a connection string in app.config or use a json
+
+Implement save all button This is for the Db. Button should be in mainViewModel. This will send the current state of the employee list to the Db
+
+Implement Currency method in EmployeeLogic
+-The default currency will be set to us dollar, for more information on how to https://docs.microsoft.com/en-us/globalization/locale/currency-formatting-in-the-dotnet-framework
+
+
+Implement CalcSalary method in EmployeeLogic #
+This textbox should be readonly.
+Add a Calculate Salary button to the employeeViewModel and make an event
+-The Salary depends on the type of employee
+
+Implement CreateMail method in EmployeeLogic
+Add a Create mail button for the EmployeeViewModel and make an event
+When the button is pressed a mail will be generated depending on the type of employee
+
+Implement Datatemplate selector
+We have a listbox of employees. Lets say i add a developer, in that case there would be more information to show so he would pretty much have his own Viewmodel and his own View
+
+Connect the enum TypeOfEmployee to the combobox in employeeView #9
+
+Implement Search and Sort methods that sorts the list/shows the specific employee/employees #8
+
+Make a view and a viewmodel for every employee that requires one #7
+(A tip is to create a base for employees)
+
+Style the combobox and the comboboxitems #
+Edit the recoursedictionary and make it look like the other boxes in the EmployeeView
