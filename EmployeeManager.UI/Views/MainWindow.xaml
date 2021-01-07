@@ -1,7 +1,7 @@
 ﻿<Window x:Class="EmployeeManager.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:EmployeeManager.ViewModels"
         xmlns:views="clr-namespace:EmployeeManager.Views"
@@ -45,11 +45,9 @@
                 <!--"I encapsulate a View in the template" -->
                 <DataTemplate DataType="{x:Type viewModels:EmployeeViewModel}">
                     <!-- Set my data context to my view model.-->
-                    <views:EmployeeView DataContext="{Binding .}"/>
+                    <views:EmployeeView DataContext="{Binding .}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
-            
         </ListBox>
     </DockPanel>
 </Window>
-

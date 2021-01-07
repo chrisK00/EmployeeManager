@@ -1,47 +1,55 @@
-﻿using Prism.Commands;
+﻿using EmployeeManager.Models;
+using EmployeeManager.Models.Developers;
+using Prism.Commands;
 using Prism.Mvvm;
-using System.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
-using System;
-using EmployeeManager.Models;
-using EmployeeManager.Models.Developers;
 
 namespace EmployeeManager.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
         #region Properties
+
         public IEnumerable<IEmployee> Employees => GetEmployees();
-        #endregion
+
+        #endregion Properties
 
         #region View Models
+
         public ObservableCollection<EmployeeViewModel> EmployeeViewModels { get; set; } = new ObservableCollection<EmployeeViewModel>();
-        #endregion
+
+        #endregion View Models
 
         #region Commands
+
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand SearchSortCommand { get; set; }
-        #endregion
+
+        #endregion Commands
 
         #region Constructor
+
         public MainWindowViewModel()
         {
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
 
             EmployeeLogic.SetCultureToUS();
-           //Load employees from Db
+            //Load employees from Db
             var loadedEmployees = DataAccess.LoadEmployees();
             //Create a employee viewmodel for each employee in loadedEmployees
             loadedEmployees.ForEach(emp => CreateEmployeeViewModel(emp));
-
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Methods
+
         private void SearchSort(string filter)
         {
             switch (filter)
@@ -51,11 +59,13 @@ namespace EmployeeManager.ViewModels
                     EmployeeViewModels.Clear();
                     sortedByJob.ForEach(emp => EmployeeViewModels.Add(emp));
                     break;
+
                 case "salary":
                     var sortedBySalary = EmployeeViewModels.OrderBy(emp => emp.Employee.Salary).ToList();
                     EmployeeViewModels.Clear();
                     sortedBySalary.ForEach(emp => EmployeeViewModels.Add(emp));
                     break;
+
                 case "name":
                     var sortedByName = EmployeeViewModels.OrderBy(emp => emp.Employee.Name).ToList();
                     EmployeeViewModels.Clear();
@@ -63,6 +73,7 @@ namespace EmployeeManager.ViewModels
                     break;
             }
         }
+
         private void AddEmployee()
         {
             // todo: Which employee am I adding?
@@ -107,6 +118,7 @@ namespace EmployeeManager.ViewModels
             return EmployeeViewModels
                 .Select(x => x.Employee);
         }
-        #endregion
+
+        #endregion Methods
     }
 }

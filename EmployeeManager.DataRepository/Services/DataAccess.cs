@@ -10,7 +10,7 @@ namespace EmployeeManager.Models
 {
     public class DataAccess
     {
-        //TODO Make a employeebase class 
+        //TODO Make a employeebase class
         public static List<FrontEndDev> LoadEmployees()
         {
             using (IDbConnection connection = new SQLiteConnection(LoadConnectionString()))
@@ -18,6 +18,7 @@ namespace EmployeeManager.Models
                 return connection.Query<FrontEndDev>("SELECT * FROM Employee", new DynamicParameters()).ToList();
             }
         }
+
         private static string LoadConnectionString(string id = "Default") => ConfigurationManager.ConnectionStrings[id].ConnectionString;
     }
 }

@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="EmployeeManager.Views.EmployeeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:EmployeeManager.ViewModels"
              d:DataContext="{d:DesignInstance viewModels:EmployeeViewModel}"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
 
     <!-- "My "View" for each employee." -->
     <Border BorderThickness="0, 0, 0, 1"
@@ -17,11 +17,10 @@
 
             <DockPanel>
                 <TextBox DockPanel.Dock="Left" Style="{StaticResource NameTextBox}" x:Name="NameTextBox" Margin="5" VerticalAlignment="Center"
-                                     Text="{Binding Employee.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                
-                <Button  DockPanel.Dock="Right" HorizontalAlignment="Right" Width="30" Height="30" Content="X" 
-                         Style="{StaticResource searchButton}" Command="{Binding FireEmployeeCommand}"/>
-                
+                                     Text="{Binding Employee.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Button  DockPanel.Dock="Right" HorizontalAlignment="Right" Width="30" Height="30" Content="X"
+                         Style="{StaticResource searchButton}" Command="{Binding FireEmployeeCommand}" />
             </DockPanel>
 
             <UniformGrid Columns="2">
@@ -34,14 +33,12 @@
 
                 <TextBox Width="200" HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource listBoxItems}" x:Name="SalaryTextBox"  FontSize="20"
                      Text="{Binding Employee.DisplaySalary, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox ItemsSource="{Binding EmployeeTypes}"  Style="{StaticResource comboBox}" SelectedItem="{Binding Employee.TypeOfEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <!--TODO Update style for comboBoxItem-->
-
+                <ComboBox ItemsSource="{Binding EmployeeTypes}"  Style="{StaticResource comboBox}"
+                          SelectedItem="{Binding Employee.TypeOfEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </ComboBox>
             </UniformGrid>
         </StackPanel>
 
         <!-- "End mini "view"" -->
     </Border>
-
 </UserControl>

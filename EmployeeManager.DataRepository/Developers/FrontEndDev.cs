@@ -9,8 +9,7 @@
         public TypeOfEmployee TypeOfEmployee { get; set; } = TypeOfEmployee.Developer;
         public string PhoneNumber { get; set; }
         public decimal Salary { get; set; }
-        public string DisplaySalary { get => $"{Salary:c}";  }
+        public string DisplaySalary { get => $"{Salary:c}"; }
         public string Email { get; set; }
-       
     }
 }

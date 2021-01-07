@@ -4,33 +4,43 @@ using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+
 namespace EmployeeManager.ViewModels
 {
     public class EmployeeViewModel : BindableBase
     {
         #region Fields
+
         private IEmployee _employee;
-        
-     public IList<TypeOfEmployee> EmployeeTypes { get; set; } = new List<TypeOfEmployee>();
-        #endregion
+
+        public IList<TypeOfEmployee> EmployeeTypes { get; set; } = new List<TypeOfEmployee>();
+
+        #endregion Fields
 
         #region Delegates
+
         public event EventHandler EmployeeFired;
-        #endregion
+
+        #endregion Delegates
 
         #region Properties
+
         public IEmployee Employee
         {
             get => _employee;
             set => SetProperty(ref _employee, value);
         }
-        #endregion
+
+        #endregion Properties
 
         #region Commands
+
         public ICommand FireEmployeeCommand { get; }
-        #endregion
+
+        #endregion Commands
 
         #region Constructor
+
         public EmployeeViewModel()
         {
             PopulateEmployeeTypes();
@@ -44,13 +54,16 @@ namespace EmployeeManager.ViewModels
                 EmployeeTypes.Add((TypeOfEmployee)item);
             }
         }
-        #endregion
+
+        #endregion Constructor
 
         #region Methods
+
         private void FireEmployee()
         {
             EmployeeFired?.Invoke(this, EventArgs.Empty);
         }
-        #endregion
+
+        #endregion Methods
     }
 }

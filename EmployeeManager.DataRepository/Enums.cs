@@ -5,7 +5,6 @@
         Developer,
         CustomerSupport,
         SalesPerson
-            
     }
 
     public enum ProgrammingLanguage
