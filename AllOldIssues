@@ -24,3 +24,8 @@ Make a view and a viewmodel for every employee that requires one #7
 
 Style the combobox and the comboboxitems #
 Edit the recoursedictionary and make it look like the other boxes in the EmployeeView
+
+Implement changeEmployeeType
+Make base class implementation of logic in order to easily add more views/viewmodels
+
+Dependancy injection
