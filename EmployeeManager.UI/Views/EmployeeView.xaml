@@ -31,7 +31,7 @@
                 <TextBox  Style="{StaticResource listBoxItems}" x:Name="PhoneTextBlock"  VerticalAlignment="Center"
                       Text="{Binding Employee.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBox Width="200" HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource listBoxItems}" x:Name="SalaryTextBox"  FontSize="20"
+                <TextBox Width="200" HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource listBoxReadOnlyItems}" x:Name="SalaryTextBox"  FontSize="20"
                      Text="{Binding Employee.DisplaySalary, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox ItemsSource="{Binding EmployeeTypes}"  Style="{StaticResource comboBox}"
                           SelectedItem="{Binding Employee.TypeOfEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Input;
 
 namespace EmployeeManager.ViewModels
@@ -37,7 +36,6 @@ namespace EmployeeManager.ViewModels
 
         public MainWindowViewModel()
         {
-            MessageBox.Show("hi");
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
 
@@ -84,10 +82,10 @@ namespace EmployeeManager.ViewModels
             // Creating a new model.
             var newEmployee = new FrontEndDev
             {
-                Name = "Peter Griffin",
-                Email = "peter.griffin@quahog.net",
-                PhoneNumber = "46-741-769", // Modify so that you have the string format in the view.
-                Salary = 40000
+                Name = "Name",
+                Email = "Email", //This will also be auto generated but the user can change
+                PhoneNumber = "PhoneNumber", // Modify so that you have the string format in the view.
+                Salary = 0 //This will depend on the type of employee and non changeable
             };
 
             // Create the view model.
