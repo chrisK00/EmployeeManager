@@ -1,9 +1,12 @@
-﻿namespace EmployeeManager.Models
+﻿using System;
+
+namespace EmployeeManager.Models
 {
     public interface IEmployee
     {
         string Name { get; set; }
         int Id { get; set; }
+        public event EventHandler EmployeeTypeChanged;
         TypeOfEmployee TypeOfEmployee { get; set; }
         string PhoneNumber { get; set; }
         public string DisplaySalary { get; }

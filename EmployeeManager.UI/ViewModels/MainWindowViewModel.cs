@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace EmployeeManager.ViewModels
@@ -36,6 +37,7 @@ namespace EmployeeManager.ViewModels
 
         public MainWindowViewModel()
         {
+            MessageBox.Show("hi");
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
 
@@ -102,6 +104,7 @@ namespace EmployeeManager.ViewModels
 
             // Handle the "Fire Employee" button when it's clicked
             viewModelToAdd.EmployeeFired += FireEmployee;
+            viewModelToAdd.Employee.EmployeeTypeChanged += ChangeEmployeeType;
 
             // Add the view model to the list.
             EmployeeViewModels.Add(viewModelToAdd);
@@ -111,7 +114,10 @@ namespace EmployeeManager.ViewModels
         {
             EmployeeViewModels.Remove(sender as EmployeeViewModel);
         }
-
+        private void ChangeEmployeeType(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         private IEnumerable<IEmployee> GetEmployees()
         {
             // Give me the employee of each view model.

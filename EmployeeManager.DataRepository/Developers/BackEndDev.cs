@@ -1,4 +1,6 @@
-﻿namespace EmployeeManager.Models.Developers
+﻿using System;
+
+namespace EmployeeManager.Models.Developers
 {
     public class BackEndDev : IDeveloper
     {
@@ -11,5 +13,7 @@
         public decimal Salary { get; set; }
         public string DisplaySalary { get => $"{Salary:c}"; }
         public string Email { get; set; }
+
+        public event EventHandler EmployeeTypeChanged;
     }
 }
