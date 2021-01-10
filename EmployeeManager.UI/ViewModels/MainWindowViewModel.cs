@@ -112,9 +112,48 @@ namespace EmployeeManager.ViewModels
         {
             EmployeeViewModels.Remove(sender as EmployeeViewModel);
         }
+
+        //TODO REFACTOR
         private void ChangeEmployeeType(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            IEmployee newEmployee = null;
+            var employee = sender as FrontEndDev;
+            if (employee != null)
+            {
+                switch (employee.TypeOfEmployee)
+                {
+                    case TypeOfEmployee.Developer:
+                        break;
+                    case TypeOfEmployee.CustomerSupport:
+                        newEmployee = new FrontEndDev
+                        {
+                            Name = employee.Name,
+                            Email = employee.Email,
+                            PhoneNumber = employee.PhoneNumber,
+                            TypeOfEmployee = employee.TypeOfEmployee,
+                            Salary = 0
+                        };
+                        break;
+                    case TypeOfEmployee.SalesPerson:
+                        break;
+                    default:
+                        break;
+                }
+                if (newEmployee is null)
+                {
+                    return;
+                }
+                var viewModelToAdd = new EmployeeViewModel
+                {
+                    Employee = newEmployee
+                };
+                viewModelToAdd.EmployeeFired += FireEmployee;
+                viewModelToAdd.Employee.EmployeeTypeChanged += ChangeEmployeeType;
+                EmployeeViewModels.Add(viewModelToAdd);
+                var newEmpIndex = EmployeeViewModels.IndexOf(viewModelToAdd);
+                EmployeeViewModels.RemoveAt(newEmpIndex - 1);
+            }
+
         }
         private IEnumerable<IEmployee> GetEmployees()
         {
