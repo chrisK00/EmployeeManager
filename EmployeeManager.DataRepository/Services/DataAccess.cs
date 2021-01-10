@@ -1,12 +1,12 @@
 ﻿using Dapper;
-using EmployeeManager.Models.Developers;
+using EmployeeManager.DataRepository.Developers;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
 
-namespace EmployeeManager.Models
+namespace EmployeeManager.DataRepository.Services
 {
     public class DataAccess
     {

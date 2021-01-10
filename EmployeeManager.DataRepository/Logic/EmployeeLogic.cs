@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Threading;
 
-namespace EmployeeManager.Models
+namespace EmployeeManager.DataRepository.Logic
 {
     public static class EmployeeLogic
     {

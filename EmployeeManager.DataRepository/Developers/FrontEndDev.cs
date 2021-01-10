@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmployeeManager.Models.Developers
+namespace EmployeeManager.DataRepository.Developers
 {
     public class FrontEndDev : IDeveloper
     {

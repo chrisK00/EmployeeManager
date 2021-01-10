@@ -1,4 +1,4 @@
-﻿namespace EmployeeManager.Models
+﻿namespace EmployeeManager.DataRepository
 {
     public enum TypeOfEmployee
     {

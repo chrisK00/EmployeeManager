@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmployeeManager.Models
+namespace EmployeeManager.DataRepository
 {
     public interface IEmployee
     {

@@ -1,13 +1,11 @@
-﻿using EmployeeManager.Models;
-using EmployeeManager.UI.ViewModels;
+﻿using EmployeeManager.DataRepository;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Input;
 
-namespace EmployeeManager.ViewModels
+namespace EmployeeManager.UI.ViewModels
 {
     public class EmployeeViewModel : BindableBase, IEmployeeViewModel
     {

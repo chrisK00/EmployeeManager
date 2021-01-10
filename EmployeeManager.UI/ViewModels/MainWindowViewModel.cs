@@ -1,5 +1,7 @@
-﻿using EmployeeManager.Models;
-using EmployeeManager.Models.Developers;
+﻿using EmployeeManager.DataRepository;
+using EmployeeManager.DataRepository.Developers;
+using EmployeeManager.DataRepository.Logic;
+using EmployeeManager.DataRepository.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -8,7 +10,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 
-namespace EmployeeManager.ViewModels
+namespace EmployeeManager.UI.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {

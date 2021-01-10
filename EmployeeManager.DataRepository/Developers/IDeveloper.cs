@@ -1,6 +1,6 @@
-﻿namespace EmployeeManager.Models.Developers
+﻿namespace EmployeeManager.DataRepository.Developers
 {
-    internal interface IDeveloper : IEmployee
+    public interface IDeveloper : IEmployee
     {
         ProgrammingFramework Framework { get; set; }
         ProgrammingLanguage Language { get; set; }

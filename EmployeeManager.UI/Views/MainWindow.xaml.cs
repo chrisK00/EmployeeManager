@@ -1,5 +1,5 @@
 ﻿using EmployeeManager.UI.ViewModels;
-using EmployeeManager.ViewModels;
+using EmployeeManager.UI;
 using System.Windows;
 
 namespace EmployeeManager.Views
