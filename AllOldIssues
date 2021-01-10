@@ -26,6 +26,6 @@ Style the combobox and the comboboxitems #
 Edit the recoursedictionary and make it look like the other boxes in the EmployeeView
 
 Implement changeEmployeeType
-Make base class implementation of logic in order to easily add more views/viewmodels
+Make base class implementation of logic in order to easily add more views/viewmodels. (employee viewmodels should just inherit from the currentEmployeeBase)
 
 Dependancy injection
