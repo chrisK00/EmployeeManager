@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmployeeManager.DataRepository.Employees;
+using System;
+using System.Windows.Input;
 
 namespace EmployeeManager.UI.ViewModels
 {
     public interface IEmployeeViewModel
     {
         event EventHandler EmployeeFired;
+        string DisplaySalary { get; }
+        IEmployee Employee { get; set; }
+        ICommand FireEmployeeCommand { get; }
     }
 }
