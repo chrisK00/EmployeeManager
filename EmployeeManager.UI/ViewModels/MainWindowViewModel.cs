@@ -1,6 +1,7 @@
 ﻿using EmployeeManager.DataRepository.Employees;
 using EmployeeManager.DataRepository.Logic;
 using EmployeeManager.DataRepository.Services;
+using Microsoft.EntityFrameworkCore;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -42,7 +43,9 @@ namespace EmployeeManager.UI.ViewModels
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
             this._db = db;
             EmployeeLogic.SetCultureToUS();
-            var loadedEmployees = _db.Employees.Select(x => x).ToList();
+
+            //Include another table
+            var loadedEmployees = _db.Employees.Include(x => x.Roles).Select(x => x).ToList();
             loadedEmployees.ForEach(emp => CreateEmployeeViewModel(emp));
         }
 
@@ -87,7 +90,7 @@ namespace EmployeeManager.UI.ViewModels
                 PhoneNumber = "PhoneNumber", // Modify so that you have the string format in the view.
                 Salary = 0M, //This will depend on the type of employee and non changeable
                 Roles = {
-                    new Role() { Name = "Front-End Dev", BaseSalary = 5000M }
+                    new Role() { Name = "Front-End Dev", BaseSalary = 5000M, Id=500 }
                 },
                 StartDate = new DateTime(year: 2021, 1, 11),
                 BirthDate = new DateTime(1996, 4, 20)
