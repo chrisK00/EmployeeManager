@@ -10,5 +10,6 @@ namespace EmployeeManager.Views
             InitializeComponent();          
             DataContext = mainWindowViewModel;
         }
+     
     }
 }
