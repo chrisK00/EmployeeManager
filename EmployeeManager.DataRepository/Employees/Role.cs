@@ -1,6 +1,6 @@
 ﻿namespace EmployeeManager.DataRepository.Employees
 {
-    public class Role
+    public class Role : IRole
     {
         public decimal BaseSalary { get; set; }
         public int Id { get; set; }
