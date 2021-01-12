@@ -13,6 +13,7 @@ namespace EmployeeManager.UI.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
+        private readonly AppDbContext _db;
         #region Properties
 
         public IEnumerable<IEmployee> Employees => GetEmployees();
@@ -35,15 +36,13 @@ namespace EmployeeManager.UI.ViewModels
 
         #region Constructor
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(AppDbContext db)
         {
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
-
+            this._db = db;
             EmployeeLogic.SetCultureToUS();
-            //Load employees from Db
-            var loadedEmployees = DataAccess.LoadEmployees();
-            //Create a employee viewmodel for each employee in loadedEmployees
+            var loadedEmployees = _db.Employees.Select(x => x).ToList();
             loadedEmployees.ForEach(emp => CreateEmployeeViewModel(emp));
         }
 

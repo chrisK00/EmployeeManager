@@ -1,6 +1,9 @@
 ﻿using EmployeeManager.UI.ViewModels;
 using EmployeeManager.UI;
 using System.Windows;
+using EmployeeManager.UI.DI;
+using Autofac;
+using EmployeeManager.DataRepository.Services;
 
 namespace EmployeeManager.Views
 {
@@ -9,8 +12,9 @@ namespace EmployeeManager.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new MainWindowViewModel();
+            var container = ContainerConfig.Configure();
+            var start = container.Resolve<AppDbContext>();
+            DataContext = new MainWindowViewModel(start);
         }
     }
 }
