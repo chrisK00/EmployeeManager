@@ -32,6 +32,7 @@ namespace EmployeeManager.UI.ViewModels
         public ICommand AddEmployeeCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand SearchSortCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
 
         #endregion Commands
 
@@ -41,6 +42,8 @@ namespace EmployeeManager.UI.ViewModels
         {
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
+            SaveCommand = new DelegateCommand(Save);
+
             this._db = db;
             EmployeeLogic.SetCultureToUS();
 
@@ -52,7 +55,10 @@ namespace EmployeeManager.UI.ViewModels
         #endregion Constructor
 
         #region Methods
-
+        private void Save()
+        {
+            _db.SaveChanges();
+        }
         private void SearchSort(string filter)
         {
             switch (filter)
@@ -89,12 +95,11 @@ namespace EmployeeManager.UI.ViewModels
                 Email = "Email", //This will also be auto generated but the user can change
                 PhoneNumber = "PhoneNumber", // Modify so that you have the string format in the view.
                 Salary = 0M, //This will depend on the type of employee and non changeable
-                Roles = {
-                    new Role() { Name = "Front-End Dev", BaseSalary = 5000M, Id=500 }
-                },
                 StartDate = new DateTime(year: 2021, 1, 11),
                 BirthDate = new DateTime(1996, 4, 20)
             };
+
+            _db.Add(newEmployee);
             // Create the view model.
             CreateEmployeeViewModel(newEmployee);
         }
@@ -117,6 +122,7 @@ namespace EmployeeManager.UI.ViewModels
         private void FireEmployee(object sender, EventArgs e)
         {
             EmployeeViewModels.Remove(sender as EmployeeViewModel);
+            _db.Remove(sender as Employee);
         }
 
         private IEnumerable<IEmployee> GetEmployees()

@@ -21,6 +21,7 @@ namespace EmployeeManager.Tests
                 StartDate = new DateTime(year: 2021, 1, 11),
                 BirthDate = new DateTime(1996, 4, 20)
             };
+
             Assert.True(newEmployee != null);
             Assert.True(newEmployee.Roles.Count > 0);
         }      
