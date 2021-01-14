@@ -9,6 +9,14 @@
         <Setter Property="Margin" Value="2" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="date">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+        <Setter Property="Background" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="Margin" Value="2" />
+    </Style>
+
     <Style TargetType="TextBox" x:Key="listBoxItems">
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="17" />
@@ -21,7 +29,7 @@
     <Style TargetType="TextBox" x:Key="listBoxReadOnlyItems">
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="FontSize" Value="17" />
-        <Setter Property="Background" Value="Black" />
+        <Setter Property="Background" Value="black" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="TextAlignment" Value="Center" />

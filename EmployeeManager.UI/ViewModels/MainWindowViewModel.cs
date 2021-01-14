@@ -16,7 +16,7 @@ namespace EmployeeManager.UI.ViewModels
     {
         private readonly AppDbContext _db;
         #region Properties
-
+        public string DisplayCurrentDate { get => DateTime.Now.ToShortDateString(); }
         public IEnumerable<IEmployee> Employees => GetEmployees();
 
         #endregion Properties

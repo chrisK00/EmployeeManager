@@ -32,7 +32,7 @@
                       Text="{Binding Employee.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox Width="200" HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource listBoxReadOnlyItems}" x:Name="SalaryTextBox"  FontSize="20"
-                     Text="{Binding Employee.Salary, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding DisplaySalary, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox  Style="{StaticResource listBoxItems}" VerticalAlignment="Center"
                       Text="{Binding Employee.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

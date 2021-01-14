@@ -14,9 +14,9 @@
         <!-- "Put me on top of your window." -->
 
         <StackPanel DockPanel.Dock="Top">
-
+            
             <UniformGrid Columns="5">
-                <Border />
+                <TextBlock Text="{Binding DisplayCurrentDate}" Style="{StaticResource date}"/>
                 <!-- Just a placeholder. -->
                 <Border />
                 <!-- Just a placeholder. -->
