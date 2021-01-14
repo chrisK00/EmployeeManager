@@ -63,12 +63,6 @@ namespace EmployeeManager.UI.ViewModels
         {
             switch (filter)
             {
-                case "job":
-                    var sortedByJob = EmployeeViewModels.OrderBy(emp => emp.Employee.Roles).ToList();
-                    EmployeeViewModels.Clear();
-                    sortedByJob.ForEach(emp => EmployeeViewModels.Add(emp));
-                    break;
-
                 case "salary":
                     var sortedBySalary = EmployeeViewModels.OrderBy(emp => emp.Employee.Salary).ToList();
                     EmployeeViewModels.Clear();

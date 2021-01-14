@@ -20,24 +20,19 @@
                 <!-- Just a placeholder. -->
                 <Border />
                 <Border />
-                <!-- Just a placeholder. -->
                 <Border />
-                <!-- Just a placeholder. -->
                 <Button Command="{Binding SaveCommand}" Content="Save" Style="{StaticResource searchButton}" />
                 <Button Command="{Binding AddEmployeeCommand}" Style="{StaticResource searchButton}" Content="Add Employee" />
             </UniformGrid>
 
             <TextBox FontSize="20" Margin="5" BorderBrush="Black" BorderThickness="3" Text="Search" />
 
-            <UniformGrid Columns="6">
+            <UniformGrid Columns="5">
                 <Border />
                 <Border />
                 <Border />
-                <!-- Just a placeholder. -->
-                <Button Command="{Binding SearchSortCommand}" CommandParameter="job" Content="By Job" Style="{StaticResource searchButton}" />
                 <Button Command="{Binding SearchSortCommand}" CommandParameter="name" Content="By Name A-Z" Style="{StaticResource searchButton}" />
                 <Button Command="{Binding SearchSortCommand}" CommandParameter="salary" Content="By Salary" Style="{StaticResource searchButton}" />
-
             </UniformGrid>
         </StackPanel>
 
