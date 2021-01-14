@@ -17,6 +17,7 @@ namespace EmployeeManager.UI.ViewModels
 
         #region Delegates
         public event EventHandler EmployeeFired;
+        public event EventHandler RoleAssigned;
         #endregion Delegates
 
         #region Properties
@@ -32,6 +33,7 @@ namespace EmployeeManager.UI.ViewModels
 
         #region Commands
         public ICommand FireEmployeeCommand { get; }
+        public ICommand AssignRoleCommand { get; }
         #endregion Commands
 
         #region Constructor
@@ -39,6 +41,7 @@ namespace EmployeeManager.UI.ViewModels
         public EmployeeViewModel()
         {
             FireEmployeeCommand = new DelegateCommand(FireEmployee);
+            AssignRoleCommand = new DelegateCommand(AssignRole);
         }
         #endregion Constructor
 
@@ -46,6 +49,10 @@ namespace EmployeeManager.UI.ViewModels
         private void FireEmployee()
         {
             EmployeeFired?.Invoke(this, EventArgs.Empty);
+        }
+        private void AssignRole()
+        {
+            RoleAssigned?.Invoke(this, EventArgs.Empty);
         }
         #endregion Methods
     }

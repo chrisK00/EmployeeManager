@@ -17,7 +17,14 @@ namespace EmployeeManager.UI.ViewModels
         private readonly AppDbContext _db;
 
         #region Properties
-        public IRole SelectedRole { get; set; }
+        private RoleViewModel _selRole;
+        public RoleViewModel SelectedRole
+        {
+            get => _selRole; set
+            {
+                _selRole = value; RaisePropertyChanged();
+            }
+        }
         public string DisplayCurrentDate { get => DateTime.Now.ToShortDateString(); }
         public IEnumerable<IEmployee> Employees => GetEmployees();
 
@@ -59,7 +66,9 @@ namespace EmployeeManager.UI.ViewModels
             var loadedRoles = _db.Roles.Select(r => r).ToList();
             loadedRoles.ForEach(r => CreateRoleViewModel(r));
         }
+        #endregion Constructor
 
+        #region Methods
         private void CreateRoleViewModel(IRole newRole)
         {
             // Plugging the model into the view model.
@@ -77,19 +86,19 @@ namespace EmployeeManager.UI.ViewModels
 
         private void RemoveRole(object sender, EventArgs e)
         {
-            RoleViewModels.Remove(sender as RoleViewModel);
 
-            //TODO FIX BUG? crash as if it was null
-            //   _db.Roles.Remove(sender as Role);
+            //Should check so roleVM isnt null.
+            var roleVM = sender as RoleViewModel;
+            RoleViewModels.Remove(roleVM);
+            //Remove the role inside the roleVM
+            _db.Remove(roleVM.Role);
         }
 
-        #endregion Constructor
 
-        #region Methods
-        private void Save()
-        {
-            _db.SaveChanges();
-        }
+
+
+        private void Save() => _db.SaveChanges();
+
         private void SearchSort(string filter)
         {
             switch (filter)
@@ -120,8 +129,8 @@ namespace EmployeeManager.UI.ViewModels
                 Email = "Email", //This will also be auto generated but the user can change
                 PhoneNumber = "PhoneNumber", // Modify so that you have the string format in the view.
                 Salary = 0M, //This will depend on the type of employee and non changeable
-                StartDate = new DateTime(year: 2021, 1, 11),
-                BirthDate = new DateTime(1996, 4, 20)
+                StartDate = new DateTime(year: DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day),
+                BirthDate = new DateTime(2000, 1, 1)
             };
 
             _db.Add(newEmployee);
@@ -129,12 +138,19 @@ namespace EmployeeManager.UI.ViewModels
             CreateEmployeeViewModel(newEmployee);
         }
 
-        private void AddRole()
+        private void AssignRole(object sender, EventArgs e)
         {
+            
+            var temp = SelectedRole.Role;
+            var empVM = sender as EmployeeViewModel;
+            empVM.Employee.Roles.Add((Role)temp);
+        }
+        private void AddRole()
+        {          
             var newRole = new Role()
             {
-                Name = "Developer",
-                BaseSalary = 100
+                Name = "Name",
+                BaseSalary = 0M
             };
             _db.Add(newRole);
             _db.SaveChanges();
@@ -152,16 +168,17 @@ namespace EmployeeManager.UI.ViewModels
 
             // Handle the "Fire Employee" button when it's clicked
             viewModelToAdd.EmployeeFired += FireEmployee;
-
+            viewModelToAdd.RoleAssigned += AssignRole;
             // Add the view model to the list.
             EmployeeViewModels.Add(viewModelToAdd);
         }
 
         private void FireEmployee(object sender, EventArgs e)
         {
-            EmployeeViewModels.Remove(sender as EmployeeViewModel);
-          
-            _db.Remove(sender as Employee);
+            var empVM = sender as EmployeeViewModel;
+            EmployeeViewModels.Remove(empVM);
+
+            _db.Remove(empVM.Employee);
         }
 
         private IEnumerable<IEmployee> GetEmployees()

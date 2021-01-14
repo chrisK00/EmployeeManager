@@ -14,7 +14,6 @@
         <!-- "Put me on top of your window." -->
 
         <StackPanel DockPanel.Dock="Top">
-            
             <UniformGrid Columns="6">
                 <TextBlock Text="{Binding DisplayCurrentDate}" Style="{StaticResource date}"/>
                 <!-- Just a placeholder. -->
@@ -39,7 +38,8 @@
         <StackPanel Margin="0,10,10,0" Width="250" DockPanel.Dock="Right">
             <Button Command="{Binding AddRoleCommand}" Content="Add Role" Style="{StaticResource searchButton}" />
 
-            <ListBox MinHeight="100" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="250" DockPanel.Dock="Right"  ItemsSource="{Binding RoleViewModels}" SelectedItem="{Binding SelectedRole}">
+            <ListBox MinHeight="100" HorizontalContentAlignment="Stretch" HorizontalAlignment="Center" Width="250" DockPanel.Dock="Right"  
+                     ItemsSource="{Binding RoleViewModels}" SelectedItem="{Binding SelectedRole,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemTemplate>
                     <DataTemplate DataType="{x:Type viewModels:RoleViewModel}">
                         <!-- Set my data context to my view model.-->
@@ -48,7 +48,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </StackPanel>
-        
+
         <ListBox BorderThickness="0" Margin="10,10,50,10" x:Name="EmployeeListBox"
                  Width="1000"  HorizontalContentAlignment="Stretch" HorizontalAlignment="Center"
                  ItemsSource="{Binding EmployeeViewModels}">
