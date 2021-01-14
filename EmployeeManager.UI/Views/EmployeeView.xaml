@@ -13,14 +13,14 @@
             Margin="5"
             Padding="5">
 
-        <StackPanel Margin="10">
-
+        <StackPanel Margin="35">
             <DockPanel>
                 <TextBox DockPanel.Dock="Left" Style="{StaticResource NameTextBox}" x:Name="NameTextBox" Margin="5" VerticalAlignment="Center"
                                      Text="{Binding Employee.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <Button  DockPanel.Dock="Right" HorizontalAlignment="Right" Width="30" Height="30" Content="X"
                          Style="{StaticResource searchButton}" Command="{Binding FireEmployeeCommand}" />
+                             
             </DockPanel>
 
             <UniformGrid Rows="2" Columns="3">
@@ -33,12 +33,17 @@
 
                 <TextBox Width="200" HorizontalAlignment="Left" IsReadOnly="True" Style="{StaticResource listBoxReadOnlyItems}" x:Name="SalaryTextBox"  FontSize="20"
                      Text="{Binding DisplaySalary, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-
+                
                 <TextBox  Style="{StaticResource listBoxItems}" VerticalAlignment="Center"
                       Text="{Binding Employee.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <TextBox  Style="{StaticResource listBoxItems}" VerticalAlignment="Center"
                       Text="{Binding Employee.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <ComboBox HorizontalAlignment="Left" MinWidth="100"
+                    ItemsSource="{Binding DisplayRoles}" SelectedItem="{Binding Employee.Roles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedIndex="0" MaxWidth="200" Style="{StaticResource comboBox}">
+                </ComboBox>
             </UniformGrid>
         </StackPanel>
 

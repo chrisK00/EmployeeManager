@@ -4,6 +4,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 
 namespace EmployeeManager.UI.ViewModels
@@ -20,6 +21,8 @@ namespace EmployeeManager.UI.ViewModels
 
         #region Properties
         public string DisplaySalary { get => $"{Employee.Salary:c}"; }
+        public List<string> DisplayRoles { get => Employee.Roles.Select(x => x.Name).ToList(); }
+
         public IEmployee Employee
         {
             get => _employee;

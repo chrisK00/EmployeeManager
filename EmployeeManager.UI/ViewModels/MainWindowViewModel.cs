@@ -15,7 +15,9 @@ namespace EmployeeManager.UI.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private readonly AppDbContext _db;
+
         #region Properties
+        public IRole SelectedRole { get; set; }
         public string DisplayCurrentDate { get => DateTime.Now.ToShortDateString(); }
         public IEnumerable<IEmployee> Employees => GetEmployees();
 
@@ -24,12 +26,14 @@ namespace EmployeeManager.UI.ViewModels
         #region View Models
 
         public ObservableCollection<IEmployeeViewModel> EmployeeViewModels { get; set; } = new ObservableCollection<IEmployeeViewModel>();
-
+        //consider iroleviewmodel for delete, test textbox remove press del, also make a view
+        public ObservableCollection<RoleViewModel> RoleViewModels { get; set; } = new ObservableCollection<RoleViewModel>();
         #endregion View Models
 
         #region Commands
 
         public ICommand AddEmployeeCommand { get; set; }
+        public ICommand AddRoleCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand SearchSortCommand { get; set; }
         public ICommand SaveCommand { get; set; }
@@ -43,6 +47,7 @@ namespace EmployeeManager.UI.ViewModels
             AddEmployeeCommand = new DelegateCommand(AddEmployee);
             SearchSortCommand = new DelegateCommand<string>(SearchSort);
             SaveCommand = new DelegateCommand(Save);
+            AddRoleCommand = new DelegateCommand(AddRole);
 
             this._db = db;
             EmployeeLogic.SetCultureToUS();
@@ -50,6 +55,32 @@ namespace EmployeeManager.UI.ViewModels
             //Include another table
             var loadedEmployees = _db.Employees.Include(x => x.Roles).Select(x => x).ToList();
             loadedEmployees.ForEach(emp => CreateEmployeeViewModel(emp));
+
+            var loadedRoles = _db.Roles.Select(r => r).ToList();
+            loadedRoles.ForEach(r => CreateRoleViewModel(r));
+        }
+
+        private void CreateRoleViewModel(IRole newRole)
+        {
+            // Plugging the model into the view model.
+            var viewModelToAdd = new RoleViewModel
+            {
+                Role = newRole
+            };
+
+            // Handle the "Fire Employee" button when it's clicked
+            viewModelToAdd.RoleRemoved += RemoveRole;
+
+            // Add the view model to the list.
+            RoleViewModels.Add(viewModelToAdd);
+        }
+
+        private void RemoveRole(object sender, EventArgs e)
+        {
+            RoleViewModels.Remove(sender as RoleViewModel);
+
+            //TODO FIX BUG? crash as if it was null
+            //   _db.Roles.Remove(sender as Role);
         }
 
         #endregion Constructor
@@ -98,6 +129,19 @@ namespace EmployeeManager.UI.ViewModels
             CreateEmployeeViewModel(newEmployee);
         }
 
+        private void AddRole()
+        {
+            var newRole = new Role()
+            {
+                Name = "Developer",
+                BaseSalary = 100
+            };
+            _db.Add(newRole);
+            _db.SaveChanges();
+            // Create the view model.
+            CreateRoleViewModel(newRole);
+        }
+
         private void CreateEmployeeViewModel(IEmployee newEmployee)
         {
             // Plugging the model into the view model.
@@ -116,6 +160,7 @@ namespace EmployeeManager.UI.ViewModels
         private void FireEmployee(object sender, EventArgs e)
         {
             EmployeeViewModels.Remove(sender as EmployeeViewModel);
+          
             _db.Remove(sender as Employee);
         }
 
