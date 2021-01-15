@@ -1,10 +1,7 @@
 ﻿using EmployeeManager.DataRepository.Employees;
-using EmployeeManager.DataRepository.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 
 namespace EmployeeManager.UI.ViewModels
@@ -12,17 +9,24 @@ namespace EmployeeManager.UI.ViewModels
     public class EmployeeViewModel : BindableBase, IEmployeeViewModel
     {
         #region Fields
+
         private IEmployee _employee;
         private IRole _selRole;
+
         #endregion Fields
 
         #region Delegates
+
         public event EventHandler EmployeeFired;
+
         public event EventHandler RoleAssigned;
+
         public event EventHandler RoleRemoved;
+
         #endregion Delegates
 
         #region Properties
+
         /// <summary>
         /// The selected item in the employee's combobox
         /// </summary>
@@ -33,6 +37,7 @@ namespace EmployeeManager.UI.ViewModels
                 _selRole = value; RaisePropertyChanged();
             }
         }
+
         public string DisplaySalary { get => $"{Employee.Salary:c}"; }
 
         public IEmployee Employee
@@ -40,12 +45,15 @@ namespace EmployeeManager.UI.ViewModels
             get => _employee;
             set => SetProperty(ref _employee, value);
         }
+
         #endregion Properties
 
         #region Commands
+
         public ICommand FireEmployeeCommand { get; }
         public ICommand AssignRoleCommand { get; }
         public ICommand RemoveRoleCommand { get; }
+
         #endregion Commands
 
         #region Constructor
@@ -56,13 +64,16 @@ namespace EmployeeManager.UI.ViewModels
             AssignRoleCommand = new DelegateCommand(AssignRole);
             RemoveRoleCommand = new DelegateCommand(RemoveRole);
         }
+
         #endregion Constructor
 
         #region Methods
+
         private void FireEmployee()
         {
             EmployeeFired?.Invoke(this, EventArgs.Empty);
         }
+
         private void AssignRole()
         {
             RoleAssigned?.Invoke(this, EventArgs.Empty);
@@ -72,6 +83,7 @@ namespace EmployeeManager.UI.ViewModels
         {
             RoleRemoved?.Invoke(this, EventArgs.Empty);
         }
+
         #endregion Methods
     }
 }

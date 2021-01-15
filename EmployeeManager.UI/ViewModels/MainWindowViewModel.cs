@@ -17,9 +17,12 @@ namespace EmployeeManager.UI.ViewModels
     {
         private readonly AppDbContext _db;
         private string _message;
+
         #region Properties
+
         public string Message { get => _message; set => SetProperty(ref _message, value); }
         private RoleViewModel _selRole;
+
         public RoleViewModel SelectedRole
         {
             get => _selRole; set
@@ -36,8 +39,10 @@ namespace EmployeeManager.UI.ViewModels
         #region View Models
 
         public ObservableCollection<IEmployeeViewModel> EmployeeViewModels { get; set; } = new ObservableCollection<IEmployeeViewModel>();
+
         //consider iroleviewmodel for delete, test textbox remove press del, also make a view
         public ObservableCollection<RoleViewModel> RoleViewModels { get; set; } = new ObservableCollection<RoleViewModel>();
+
         #endregion View Models
 
         #region Commands
@@ -69,9 +74,11 @@ namespace EmployeeManager.UI.ViewModels
             var loadedRoles = _db.Roles.Select(r => r).ToList();
             loadedRoles.ForEach(r => CreateRoleViewModel(r));
         }
+
         #endregion Constructor
 
         #region Methods
+
         private void CreateRoleViewModel(IRole newRole)
         {
             // Plugging the model into the view model.
@@ -95,6 +102,7 @@ namespace EmployeeManager.UI.ViewModels
             //Remove the role inside the roleVM
             _db.Remove(roleVM.Role);
         }
+
         public void RemoveEmployeeRole(object sender, EventArgs e)
         {
             var empVM = sender as EmployeeViewModel;
@@ -149,7 +157,7 @@ namespace EmployeeManager.UI.ViewModels
             CreateEmployeeViewModel(newEmployee);
         }
 
-        //should return task and name assignroleasync if is async  
+        //should return task and name assignroleasync if is async
         private async void AssignRole(object sender, EventArgs e)
         {
             if (SelectedRole is null)
@@ -163,6 +171,7 @@ namespace EmployeeManager.UI.ViewModels
             var empVM = sender as EmployeeViewModel;
             empVM.Employee.Roles.Add((Role)temp);
         }
+
         private void AddRole()
         {
             var newRole = new Role()
@@ -185,6 +194,12 @@ namespace EmployeeManager.UI.ViewModels
             };
 
             // Handle the "Fire Employee" button when it's clicked
+
+            //Display the first role of an employee
+            if (newEmployee.Roles.Count > 0)
+            {
+                viewModelToAdd.SelectedRole = newEmployee.Roles[0];
+            }
             viewModelToAdd.EmployeeFired += FireEmployee;
             viewModelToAdd.RoleAssigned += AssignRole;
             viewModelToAdd.RoleRemoved += RemoveEmployeeRole;

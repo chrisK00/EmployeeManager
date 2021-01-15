@@ -7,7 +7,9 @@ namespace EmployeeManager.UI.ViewModels
     public interface IEmployeeViewModel
     {
         event EventHandler EmployeeFired;
+
         event EventHandler RoleRemoved;
+
         string DisplaySalary { get; }
         IEmployee Employee { get; set; }
         ICommand FireEmployeeCommand { get; }

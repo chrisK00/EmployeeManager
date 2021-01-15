@@ -1,6 +1,5 @@
 ﻿using EmployeeManager.DataRepository.Employees;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 namespace EmployeeManager.DataRepository.Services
 {
@@ -16,6 +15,5 @@ namespace EmployeeManager.DataRepository.Services
                 "Data Source=Emp.db");
             base.OnConfiguring(optionsBuilder);
         }
-       
     }
 }

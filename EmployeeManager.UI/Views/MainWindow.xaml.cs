@@ -7,9 +7,8 @@ namespace EmployeeManager.Views
     {
         public MainWindow(MainWindowViewModel mainWindowViewModel)
         {
-            InitializeComponent();          
+            InitializeComponent();
             DataContext = mainWindowViewModel;
         }
-     
     }
 }

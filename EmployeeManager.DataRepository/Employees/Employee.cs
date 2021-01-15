@@ -21,6 +21,6 @@ namespace EmployeeManager.DataRepository.Employees
             Roles = new List<Role>();
             Email = "";
             PhoneNumber = "";
-        }     
+        }
     }
 }

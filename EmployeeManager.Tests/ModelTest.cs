@@ -24,8 +24,6 @@ namespace EmployeeManager.Tests
 
             Assert.True(newEmployee != null);
             Assert.True(newEmployee.Roles.Count > 0);
-        }      
-
+        }
     }
 }
-
