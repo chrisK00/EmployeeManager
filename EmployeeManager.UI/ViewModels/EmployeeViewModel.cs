@@ -13,16 +13,27 @@ namespace EmployeeManager.UI.ViewModels
     {
         #region Fields
         private IEmployee _employee;
+        private IRole _selRole;
         #endregion Fields
 
         #region Delegates
         public event EventHandler EmployeeFired;
         public event EventHandler RoleAssigned;
+        public event EventHandler RoleRemoved;
         #endregion Delegates
 
         #region Properties
+        /// <summary>
+        /// The selected item in the employee's combobox
+        /// </summary>
+        public IRole SelectedRole
+        {
+            get => _selRole; set
+            {
+                _selRole = value; RaisePropertyChanged();
+            }
+        }
         public string DisplaySalary { get => $"{Employee.Salary:c}"; }
-        public List<string> DisplayRoles { get => Employee.Roles.Select(x => x.Name).ToList(); }
 
         public IEmployee Employee
         {
@@ -34,6 +45,7 @@ namespace EmployeeManager.UI.ViewModels
         #region Commands
         public ICommand FireEmployeeCommand { get; }
         public ICommand AssignRoleCommand { get; }
+        public ICommand RemoveRoleCommand { get; }
         #endregion Commands
 
         #region Constructor
@@ -42,6 +54,7 @@ namespace EmployeeManager.UI.ViewModels
         {
             FireEmployeeCommand = new DelegateCommand(FireEmployee);
             AssignRoleCommand = new DelegateCommand(AssignRole);
+            RemoveRoleCommand = new DelegateCommand(RemoveRole);
         }
         #endregion Constructor
 
@@ -53,6 +66,11 @@ namespace EmployeeManager.UI.ViewModels
         private void AssignRole()
         {
             RoleAssigned?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void RemoveRole()
+        {
+            RoleRemoved?.Invoke(this, EventArgs.Empty);
         }
         #endregion Methods
     }

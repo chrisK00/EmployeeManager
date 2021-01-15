@@ -9,13 +9,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" MinHeight="400" MinWidth="1000">
 
-    <DockPanel Margin="20">
+    <DockPanel Margin="15">
 
         <!-- "Put me on top of your window." -->
 
         <StackPanel DockPanel.Dock="Top">
-            <UniformGrid Columns="6">
+          
+            <UniformGrid Columns="7">
                 <TextBlock Text="{Binding DisplayCurrentDate}" Style="{StaticResource date}"/>
+                  <TextBlock Text="{Binding Message}" Style="{StaticResource date}"></TextBlock>
                 <!-- Just a placeholder. -->
                 <Border />
                 <Border />

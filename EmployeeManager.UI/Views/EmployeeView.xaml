@@ -25,7 +25,7 @@
                          Style="{StaticResource searchButton}" Command="{Binding AssignRoleCommand}" />
 
                 <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Width="100" Height="30" Content="Remove Role"
-                         Style="{StaticResource searchButton}"  />
+                    Command="{Binding RemoveRoleCommand}" Style="{StaticResource searchButton}"  />
             </DockPanel>
 
             <UniformGrid Rows="2" Columns="3">
@@ -46,8 +46,8 @@
                       Text="{Binding Employee.BirthDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <ComboBox HorizontalAlignment="Left" MinWidth="100"
-                    ItemsSource="{Binding DisplayRoles, UpdateSourceTrigger=PropertyChanged}" 
-                    SelectedIndex="0" MaxWidth="200" Style="{StaticResource comboBox}" IsReadOnly="True"/>
+                    ItemsSource="{Binding Employee.Roles, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name"
+                    SelectedIndex="0" SelectedItem="{Binding SelectedRole}" MaxWidth="200" Style="{StaticResource comboBox}"/>
             </UniformGrid>
         </StackPanel>
 

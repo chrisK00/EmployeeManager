@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace EmployeeManager.UI.ViewModels
@@ -15,8 +16,9 @@ namespace EmployeeManager.UI.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private readonly AppDbContext _db;
-
+        private string _message;
         #region Properties
+        public string Message { get => _message; set => SetProperty(ref _message, value); }
         private RoleViewModel _selRole;
         public RoleViewModel SelectedRole
         {
@@ -25,7 +27,8 @@ namespace EmployeeManager.UI.ViewModels
                 _selRole = value; RaisePropertyChanged();
             }
         }
-        public string DisplayCurrentDate { get => DateTime.Now.ToShortDateString(); }
+
+        public static string DisplayCurrentDate { get => DateTime.Now.ToShortDateString(); }
         public IEnumerable<IEmployee> Employees => GetEmployees();
 
         #endregion Properties
@@ -86,18 +89,26 @@ namespace EmployeeManager.UI.ViewModels
 
         private void RemoveRole(object sender, EventArgs e)
         {
-
             //Should check so roleVM isnt null.
             var roleVM = sender as RoleViewModel;
             RoleViewModels.Remove(roleVM);
             //Remove the role inside the roleVM
             _db.Remove(roleVM.Role);
         }
+        public void RemoveEmployeeRole(object sender, EventArgs e)
+        {
+            var empVM = sender as EmployeeViewModel;
+            var roleToRemove = empVM.SelectedRole;
+            empVM.Employee.Roles.Remove((Role)roleToRemove);
+        }
 
-
-
-
-        private void Save() => _db.SaveChanges();
+        private async void Save()
+        {
+            _db.SaveChanges();
+            Message = $"Saved {DisplayCurrentDate}";
+            await Task.Delay(5000);
+            Message = "";
+        }
 
         private void SearchSort(string filter)
         {
@@ -138,15 +149,22 @@ namespace EmployeeManager.UI.ViewModels
             CreateEmployeeViewModel(newEmployee);
         }
 
-        private void AssignRole(object sender, EventArgs e)
+        //should return task and name assignroleasync if is async  
+        private async void AssignRole(object sender, EventArgs e)
         {
-            
+            if (SelectedRole is null)
+            {
+                Message = "Select a role";
+                await Task.Delay(5000);
+                Message = "";
+                return;
+            }
             var temp = SelectedRole.Role;
             var empVM = sender as EmployeeViewModel;
             empVM.Employee.Roles.Add((Role)temp);
         }
         private void AddRole()
-        {          
+        {
             var newRole = new Role()
             {
                 Name = "Name",
@@ -169,6 +187,7 @@ namespace EmployeeManager.UI.ViewModels
             // Handle the "Fire Employee" button when it's clicked
             viewModelToAdd.EmployeeFired += FireEmployee;
             viewModelToAdd.RoleAssigned += AssignRole;
+            viewModelToAdd.RoleRemoved += RemoveEmployeeRole;
             // Add the view model to the list.
             EmployeeViewModels.Add(viewModelToAdd);
         }
