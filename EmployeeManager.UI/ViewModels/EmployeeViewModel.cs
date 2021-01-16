@@ -38,8 +38,6 @@ namespace EmployeeManager.UI.ViewModels
             }
         }
 
-        public string DisplaySalary { get => $"{Employee.Salary:c}"; }
-
         public IEmployee Employee
         {
             get => _employee;

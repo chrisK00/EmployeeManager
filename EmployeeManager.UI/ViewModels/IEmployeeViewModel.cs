@@ -10,7 +10,6 @@ namespace EmployeeManager.UI.ViewModels
 
         event EventHandler RoleRemoved;
 
-        string DisplaySalary { get; }
         IEmployee Employee { get; set; }
         ICommand FireEmployeeCommand { get; }
         ICommand RemoveRoleCommand { get; }

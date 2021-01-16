@@ -10,6 +10,7 @@ namespace EmployeeManager.DataRepository.Employees
         string PhoneNumber { get; set; }
 
         //calculated depending on startdate, birth date, role base salary
+        string DisplaySalary { get; }
         decimal Salary { get; set; }
 
         string Email { get; set; }
