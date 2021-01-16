@@ -1,4 +1,5 @@
 ﻿using EmployeeManager.DataRepository.Employees;
+using EmployeeManager.DataRepository.Logic;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -34,7 +35,8 @@ namespace EmployeeManager.UI.ViewModels
         {
             get => _selRole; set
             {
-                _selRole = value; RaisePropertyChanged();
+                SetProperty(ref _selRole, value);
+                Employee.Email = EmployeeLogic.CreateMail(this);
             }
         }
 

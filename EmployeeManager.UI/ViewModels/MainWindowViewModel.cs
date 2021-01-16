@@ -158,7 +158,7 @@ namespace EmployeeManager.UI.ViewModels
         }
 
         //should return task and name assignroleasync if is async
-        private async void AssignRole(object sender, EventArgs e)
+        private void AssignRole(object sender, EventArgs e)
         {
             if (SelectedRole is null)
             {

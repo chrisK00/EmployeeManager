@@ -16,7 +16,14 @@ namespace EmployeeManager.DataRepository.Employees
         public string DisplaySalary { get => $"{Salary:c}"; }
         public decimal Salary { get => _salary; set { _salary = value; RaisePropertyChanged(DisplaySalary); } }
         private decimal _salary;
-        public string Email { get; set; }
+        private string _email;
+
+        public string Email
+        {
+            get => _email; set =>
+                SetProperty(ref _email, value);
+        }
+
         public List<Employee> ReportsTo { get; set; }
 
         public Employee()
