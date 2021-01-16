@@ -16,7 +16,7 @@ namespace EmployeeManager.Tests
                 PhoneNumber = "PhoneNumber",
                 Salary = 0M,
                 Roles = {
-                    new Role() { Name = "Front-End Dev", BaseSalary = 5000M, Id=500 }
+                     {new Role { Name = "Front-End Dev", BaseSalary = 5000M, Id=500 } }
                 },
                 StartDate = new DateTime(year: 2021, 1, 11),
                 BirthDate = new DateTime(1996, 4, 20)

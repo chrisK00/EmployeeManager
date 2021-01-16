@@ -15,18 +15,32 @@
         <!-- "Put me on top of your window." -->
 
         <StackPanel DockPanel.Dock="Top">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
+                <TextBlock Grid.Column="0" Text="{Binding DisplayCurrentDate}" Style="{StaticResource date}" />
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Message}" Style="{StaticResource date}"></TextBlock>
+                <Button Grid.Column="3" Command="{Binding SaveCommand}" Content="Save" Style="{StaticResource searchButton}" />
+                <Button Grid.Column="4" Command="{Binding AddEmployeeCommand}" Style="{StaticResource searchButton}" Content="Add Employee" />
+            </Grid>
+            <!--
             <UniformGrid Columns="7">
                 <TextBlock Text="{Binding DisplayCurrentDate}" Style="{StaticResource date}" />
                 <TextBlock Text="{Binding Message}" Style="{StaticResource date}"></TextBlock>
-                <!-- Just a placeholder. -->
+                Just a placeholder.
                 <Border />
                 <Border />
                 <Border />
                 <Button Command="{Binding SaveCommand}" Content="Save" Style="{StaticResource searchButton}" />
                 <Button Command="{Binding AddEmployeeCommand}" Style="{StaticResource searchButton}" Content="Add Employee" />
             </UniformGrid>
-
+-->
             <TextBox FontSize="20" Margin="5" BorderBrush="Black" BorderThickness="3" Text="Search" />
 
             <UniformGrid Columns="5">

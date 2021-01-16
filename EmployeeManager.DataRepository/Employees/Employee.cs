@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace EmployeeManager.DataRepository.Employees
 {
@@ -8,12 +9,10 @@ namespace EmployeeManager.DataRepository.Employees
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Role> Roles { get => _roles; set => SetProperty(ref _roles, value); }
-        private List<Role> _roles;
+        public ObservableCollection<Role> Roles { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime BirthDate { get; set; }
         public string PhoneNumber { get; set; }
-
         public string DisplaySalary { get => $"{Salary:c}"; }
         public decimal Salary { get => _salary; set { _salary = value; RaisePropertyChanged(DisplaySalary); } }
         private decimal _salary;
@@ -23,7 +22,7 @@ namespace EmployeeManager.DataRepository.Employees
         public Employee()
         {
             ReportsTo = new List<Employee>();
-            Roles = new List<Role>();
+            Roles = new ObservableCollection<Role>();
             Email = "";
             PhoneNumber = "";
         }

@@ -162,14 +162,17 @@ namespace EmployeeManager.UI.ViewModels
         {
             if (SelectedRole is null)
             {
-                Message = "Select a role";
-                await Task.Delay(5000);
-                Message = "";
+                MessageBuilder("Select a role");
                 return;
             }
-            var temp = SelectedRole.Role;
+
             var empVM = sender as EmployeeViewModel;
-            empVM.Employee.Roles.Add((Role)temp);
+            if (empVM.Employee.Roles.Contains(SelectedRole.Role))
+            {
+                MessageBuilder($"{empVM.Employee.Name} already has this role");
+                return;
+            }
+            empVM.Employee.Roles.Add((Role)SelectedRole.Role);
         }
 
         private void AddRole()
@@ -220,6 +223,13 @@ namespace EmployeeManager.UI.ViewModels
             // Give me the employee of each view model.
             return EmployeeViewModels
                 .Select(x => x.Employee);
+        }
+
+        private async void MessageBuilder(string msg)
+        {
+            Message = msg;
+            await Task.Delay(5000);
+            Message = "";
         }
 
         #endregion Methods
